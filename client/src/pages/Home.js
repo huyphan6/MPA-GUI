@@ -1,6 +1,9 @@
 import React, { useState } from "react"; 
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Typography, Box, Stack, Button, LinearProgress, Snackbar } from "@mui/material";
+import { Typography, Box, Stack, Button, LinearProgress, AppBar, Toolbar, IconButton, Snackbar } from "@mui/material";
+import NavBar from "../components/NavBar";
+import axios from "../utils/axios";
+import useToken from '../utils/useToken';
 
 const Home = () => {
   const columns = [
@@ -152,6 +155,8 @@ const Home = () => {
 
   return (
     <div>
+      <NavBar />
+      
       <Box mx={10}>
         <Box
           component="homepage"
@@ -161,6 +166,8 @@ const Home = () => {
           mt={5}
           mx={"auto"}
         >
+          {/* insert navbar here */}
+        
           <Typography variant="h4" mb={5}>
             MPA Home
           </Typography>

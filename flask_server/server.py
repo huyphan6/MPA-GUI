@@ -53,18 +53,22 @@ def users():
 @app.route('/login', methods=['POST'])
 def login():
     print(request.json)
+    conn = get_db()
+    cursor = conn.cursor()
 
-    return request.json
+    if request.method == 'POST':
+        print(request.json)
+        username = request.json['username']
+        pwd = request.json['password']
 
-@app.route('/register', methods=['POST'])
-def register():
-    print(request.json)
-
-    return request.json
-
-@app.route("/members")
-def members():
-    return {'members': ['John', 'Mary', 'Bob']}
+        sql_query = """SELECT * FROM users WHERE username = ? AND password = ?"""
+        cursor = cursor.execute(sql_query, (username, pwd))
+        result = cursor.fetchall()
+        
+        if result == []:
+            return False
+        else:
+            return True
 
 if __name__ == "__main__":
     app.run(debug=True)

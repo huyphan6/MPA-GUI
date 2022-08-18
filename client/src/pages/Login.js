@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -13,26 +13,46 @@ import {
 // import { useSnackbar } from "notistack";
 import axios from "../utils/axios";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import useToken from '../utils/useToken';
 
 const Login = () => {
+  const { setToken, saveToken } = useToken()
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginForm, setLoginForm] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    setLoginForm({
+      ...loginForm,
+      [event.target.name]: event.target.value,
+    });
+  }
 
   const handleSubmit = (event) => {
     axios
-      .post("/login", { username: username, password: password })
-      .then(navigate("/home"))
-      .catch(() => {
-        console.log("Invalid username or password");
+      .post("/token", loginForm)
+      .then(res => {
+        saveToken(res.data.access_token);
+        localStorage.setItem("isLoggedIn", true)
+        navigate('/home');
+        console.log(res.data.access_token)
+        console.log("successfully logged in")
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
       });
   };
 
   return (
     <div>
       <Box
-        component="form"
         display="flex"
         flexDirection="column"
         justifyContent="center"
@@ -58,10 +78,10 @@ const Login = () => {
               id="username"
               label="User Name"
               fullWidth
-              value={username}
+              value={loginForm.username}
               placeholder="Enter your user name"
               required
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleChange}
             />
             <TextField
               name="password"
@@ -69,8 +89,8 @@ const Login = () => {
               id="password"
               label="Password"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={loginForm.password}
+              onChange={handleChange}
               placeholder="Enter your password"
               fullWidth
             />

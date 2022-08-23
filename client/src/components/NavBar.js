@@ -16,7 +16,7 @@ const NavBar = () => {
       .then(res => {
         removeToken()
         localStorage.removeItem("isLoggedIn")
-        navigate('/login');
+        navigate('/');
         console.log("successfully removed token and logged out")
       })
   }
@@ -41,6 +41,7 @@ const NavBar = () => {
 
         <Stack direction="row" spacing={2}>
           <Button color='inherit' onClick={() => navigate("/profile")}> Profile </Button>
+          <Button color='inherit' onClick={() => navigate("/users")}> Users </Button>
           <Button color='inherit' onClick={() => logOut()}> Log Out </Button>
 
         </Stack>

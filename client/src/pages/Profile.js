@@ -4,19 +4,19 @@ import useToken from "../utils/useToken";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
-  const { token, setToken, getToken } = useToken();
+  const { setToken } = useToken();
 
   const getData = () => {
     axios({
       method: "GET",
       url: "/profile",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
       .then((response) => {
-        console.log(token);
         const res = response.data;
+        console.log(res)
         res.access_token && setToken(res.access_token);
         setProfileData(res);
       })
@@ -35,8 +35,8 @@ const Profile = () => {
       <button onClick={getData}>Click me</button>
       {profileData && (
         <div>
-          <p>Profile name: {profileData.profile_name}</p>
-          <p>About me: {profileData.about_me}</p>
+          <p>Name: {profileData.name}</p>
+          <p>About me: {profileData.about}</p>
         </div>
       )}
     </div>

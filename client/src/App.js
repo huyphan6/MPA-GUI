@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import useToken from "./utils/useToken";
 import Header from "./pages/Header";
+import Users from "./pages/Users";
 
 function App() {
   const { token, setToken, saveToken, removeToken } = useToken();
@@ -31,6 +32,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/users" element={<Users />} />
           </Routes>
         </div>
       </div>

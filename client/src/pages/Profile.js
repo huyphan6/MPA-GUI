@@ -1,44 +1,23 @@
 import React, { useState } from "react";
 import axios from "../utils/axios";
 import useToken from "../utils/useToken";
+import { Typography, Button } from "@mui/material";
+import NavBar from "../components/NavBar";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
   const { setToken } = useToken();
 
-  const getData = () => {
-    axios({
-      method: "GET",
-      url: "/profile",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        const res = response.data;
-        console.log(res)
-        res.access_token && setToken(res.access_token);
-        setProfileData(res);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-      });
-  };
+  const profile = localStorage.getItem("loggedInAs");
 
   return (
-    <div>
-      <p>To get your profile details: </p>
-      <button onClick={getData}>Click me</button>
-      {profileData && (
-        <div>
-          <p>Name: {profileData.name}</p>
-          <p>About me: {profileData.about}</p>
-        </div>
-      )}
+
+    <div> 
+      <NavBar />
+
+      <Typography variant="h4" align="center" mt={2} >
+        Currently Logged in as User: {profile}
+      </Typography>
     </div>
   );
 };

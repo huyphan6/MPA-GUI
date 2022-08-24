@@ -40,6 +40,7 @@ const NavBar = () => {
         </Typography>
 
         <Stack direction="row" spacing={2}>
+          <Button color='inherit' onClick={() => navigate("/home")}> Home </Button>
           <Button color='inherit' onClick={() => navigate("/profile")}> Profile </Button>
           <Button color='inherit' onClick={() => navigate("/users")}> Users </Button>
           <Button color='inherit' onClick={() => logOut()}> Log Out </Button>

@@ -25,7 +25,9 @@ const Register = () => {
   const axiosSubmit = (event) => {
     axios
       .post("/register", {firstName: firstName, lastName: lastName, email: email, username: username, password: password })
-      .then(navigate("/home"))
+      .then(
+        navigate("/login")
+        )
       .catch(() => {
         console.log("Invalid input");
       });

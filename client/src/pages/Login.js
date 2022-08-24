@@ -37,6 +37,7 @@ const Login = () => {
       .then(res => {
         saveToken(res.data.access_token);
         localStorage.setItem("isLoggedIn", true)
+        localStorage.setItem("loggedInAs", loginForm.username)
         navigate('/home');
         console.log(res.data.access_token)
         console.log("successfully logged in")

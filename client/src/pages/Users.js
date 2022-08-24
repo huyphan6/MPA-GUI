@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "../utils/axios";
 import useToken from "../utils/useToken";
 import { Typography, Button, Stack, Table } from "@mui/material";
+import NavBar from "../components/NavBar";
 
 const Users = () => {
   const [userData, setUserData] = useState(null);
@@ -32,13 +33,16 @@ const Users = () => {
   };
 
   return (
+    <div>
+    <NavBar />
+
     <Stack
       direction="column"
       spacing={2}
       alignItems="center"
       justifyContent="center"
     >
-      <Typography variant="h4">Show Authorized Users: </Typography>
+      <Typography variant="h4" mt={2}>Show Authorized Users: </Typography>
       <Button variant="contained" color="primary" onClick={getUserData}>
         Click me
       </Button>
@@ -58,6 +62,7 @@ const Users = () => {
         </div>
       )}
     </Stack>
+    </div>
   );
 };
 

@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import axios from "../utils/axios";
-import useToken from "../utils/useToken";
-import { Typography, Button } from "@mui/material";
+import React from "react";
+import { Typography } from "@mui/material";
 import NavBar from "../components/NavBar";
 
 const Profile = () => {
-  const [profileData, setProfileData] = useState(null);
-  const { setToken } = useToken();
 
   const profile = localStorage.getItem("loggedInAs");
 

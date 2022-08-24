@@ -16,6 +16,7 @@ const NavBar = () => {
       .then(res => {
         removeToken()
         localStorage.removeItem("isLoggedIn")
+        localStorage.removeItem("loggedInAs")
         navigate('/');
         console.log("successfully removed token and logged out")
       })

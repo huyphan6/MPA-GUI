@@ -10,7 +10,7 @@ import sqlite3
 api = Flask(__name__)
 CORS(api, resources={r"/*": {"origins": "*"}})
 
-api.config["JWT_SECRET_KEY"] = '852e56d4-a722-4ce4-bc95-9260f6230da1'
+api.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY', 'default-secret-key')
 jwt = JWTManager(api)
 api.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
 
